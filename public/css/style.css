@@ -3,7 +3,6 @@
     margin: 0;
     padding: 0;
     border: 0;
-    list-style: none;
 }
 header#main,footer#main {
     background: green;
@@ -19,27 +18,27 @@ header#main h1 a:hover {
     text-decoration: none;
     color: orange;
 }
-h2 {
-    text-align: center;
-}
 #content {
     clear: left;
     padding: 20px;
+}
+#content h2 {
+    text-align: center;
 }
 /**
  * Styles for foto element
  */
 div.container {
-    width: 500px;
-    height: 500px;
+    width: 500px;/* width of green square */
+    height: 500px;/* height of green square */
     background: green;
     border: 1px solid black;
     margin: 0 auto;
 }
 #myfoto {
     display: block;
-    width: 200px;
-    height: 200px;
-    margin: 150px 150px;
+    width: 200px; /* width of displayed image */
+    height: 200px; /* height of displayed image */
+    margin: 150px;
     background: url(/images/image.jpg) -1000px 0;
 }
