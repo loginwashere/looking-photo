@@ -41,5 +41,5 @@ div.container {
     width: 200px; /* width of displayed image */
     height: 200px; /* height of displayed image */
     margin: 150px;
-    background: url(/images/image.jpg) -1000px 0;
+    background: url(/images/image.jpg);
 }
