@@ -11,6 +11,9 @@ header#main,footer#main {
     color: #fff;
     clear: both;
 }
+footer#main ul{
+    list-style: none;
+}
 header#main h1 a {
     color: #fff;
 }
