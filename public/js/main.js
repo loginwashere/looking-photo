@@ -5,26 +5,26 @@ $(document).ready(function() {
 	/**
 	 * My foto block
 	 */
-	var foto = $("#myfoto");
+	var foto      = $("#myfoto");
 	var container = $(".container");
 
 	var positions = {
-		topLeft : '-200px 0',
-		topCenter : '-400px 0',
-		topRight : '-600px 0',
-		centerLeft : '-800px 0',
+		topLeft      : '-200px 0',
+		topCenter    : '-400px 0',
+		topRight     : '-600px 0',
+		centerLeft   : '-800px 0',
 		centerCenter : '0 0',
-		centerRight : '-1200px 0',
-		bottomLeft : '-1400px 0',
+		centerRight  : '-1200px 0',
+		bottomLeft   : '-1400px 0',
 		bottomCenter : '-1600px 0',
-		bottomRight : '-1800px 0',
-		initial : '-1000px 0',
-		fun : '-2000px 0'
+		bottomRight  : '-1800px 0',
+		initial      : '-1000px 0',
+		fun          : '-2000px 0'
 	};
 
 	foto.click(function() {
-				foto.css('background-position', positions.fun);
-			});
+		foto.css('background-position', positions.fun);
+	});
 
 	function findBorders(element) {
 		var position = element.offset();
