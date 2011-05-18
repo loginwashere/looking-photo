@@ -33,7 +33,8 @@ div.container {
     height: 500px;/* height of green square */
     background: green;
     border: 1px solid black;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
+    float:right;
 }
 #myfoto {
     display: block;
