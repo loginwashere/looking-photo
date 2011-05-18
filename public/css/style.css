@@ -1,0 +1,45 @@
+@CHARSET "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+}
+header#main,footer#main {
+    background: green;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    clear: both;
+}
+header#main h1 a {
+    color: #fff;
+}
+header#main h1 a:hover {
+    text-decoration: none;
+    color: orange;
+}
+h2 {
+    text-align: center;
+}
+#content {
+    clear: left;
+    padding: 20px;
+}
+/**
+ * Styles for foto element
+ */
+div.container {
+    width: 500px;
+    height: 500px;
+    background: green;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+#myfoto {
+    display: block;
+    width: 200px;
+    height: 200px;
+    margin: 150px 150px;
+    background: url(/images/image.jpg) -1000px 0;
+}
