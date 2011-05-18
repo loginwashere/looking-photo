@@ -1,0 +1,7 @@
+Looking foto with jQuery
+
+This small jQuery script watches for mouse movement.
+
+When mouse moves over green square, it starts change style of inner square (foto)
+
+It creates an illusion, that foto is looking at mouse.
