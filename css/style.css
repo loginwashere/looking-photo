@@ -8,7 +8,6 @@ header.main,footer.main {
     padding: 10px;
     text-align: center;
     color: #fff;
-    clear: both;
 }
 footer.main ul{
     list-style: none;
@@ -21,10 +20,10 @@ footer.main ul{
     color: orange;
 }
 #content {
-    clear: left;
     padding: 20px;
 }
-#content h2 {
+#content h2,
+#content p {
     text-align: center;
 }
 /**
@@ -35,8 +34,7 @@ div.container {
     height: 300px;/* height of green square */
     background: green;
     border: 1px solid black;
-    /*margin: 0 auto;*/
-    float:right;
+    margin: 20px auto;
 }
 #myfoto {
     display: block;
