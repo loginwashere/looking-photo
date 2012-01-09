@@ -1,23 +1,22 @@
-@CHARSET "UTF-8";
 * {
     margin: 0;
     padding: 0;
     border: 0;
 }
-header#main,footer#main {
+header.main,footer.main {
     background: green;
     padding: 10px;
     text-align: center;
     color: #fff;
     clear: both;
 }
-footer#main ul{
+footer.main ul{
     list-style: none;
 }
-header#main h1 a {
+header.main h1 a {
     color: #fff;
 }
-header#main h1 a:hover {
+header.main h1 a:hover {
     text-decoration: none;
     color: orange;
 }
