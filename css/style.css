@@ -13,10 +13,10 @@ header.main,footer.main {
 footer.main ul{
     list-style: none;
 }
-header.main h1 a {
+.main a {
     color: #fff;
 }
-header.main h1 a:hover {
+.main a:hover {
     text-decoration: none;
     color: orange;
 }
