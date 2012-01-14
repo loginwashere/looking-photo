@@ -3,11 +3,20 @@
     padding: 0;
     border: 0;
 }
+body {
+    font: 11pt Arial, Helvetica, sans-serif;
+}
 header.main,footer.main {
     background: green;
     padding: 10px;
     text-align: center;
     color: #fff;
+}
+footer.main {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 footer.main ul{
     list-style: none;
