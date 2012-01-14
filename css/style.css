@@ -39,14 +39,15 @@ footer.main ul{
  * Styles for foto element
  */
 div.container {
-    width: 300px;/* width of green square */
-    height: 300px;/* height of green square */
+    width: 600px;/* width of green square */
+    height: 600px;/* height of green square */
     background: green;
     border: 1px solid black;
     margin: 20px auto;
 }
-#myfoto {
+.looking-photo {
     display: block;
+    float: left;
     width: 200px; /* width of displayed image */
     height: 200px; /* height of displayed image */
     margin: 50px;
