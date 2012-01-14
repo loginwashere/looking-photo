@@ -61,7 +61,7 @@
             },
             setBackgroundImage: {
                 value: function (value) {
-                    this.element.css('backgroundImage', value);
+                    this.element.css('backgroundImage', 'url(' + value + ')');
                 }
             },
             positions: {
