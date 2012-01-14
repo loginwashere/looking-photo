@@ -25,38 +25,43 @@
                 value: function (mouse) {
                     switch (true) {
                         case this.condition.topLeft(mouse, this.border):
-                            this.setBackground(this.positions.topLeft);
+                            this.setBackgroundPosition(this.positions.topLeft);
                             break;
                         case this.condition.topRight(mouse, this.border):
-                            this.setBackground(this.positions.topRight);
+                            this.setBackgroundPosition(this.positions.topRight);
                             break;
                         case this.condition.top(mouse, this.border):
-                            this.setBackground(this.positions.topCenter);
+                            this.setBackgroundPosition(this.positions.topCenter);
                             break;
                         case this.condition.centerLeft(mouse, this.border):
-                            this.setBackground(this.positions.centerLeft);
+                            this.setBackgroundPosition(this.positions.centerLeft);
                             break;
                         case this.condition.center(mouse, this.border):
-                            this.setBackground(this.positions.centerCenter);
+                            this.setBackgroundPosition(this.positions.centerCenter);
                             break;
                         case this.condition.centerRight(mouse, this.border):
-                            this.setBackground(this.positions.centerRight);
+                            this.setBackgroundPosition(this.positions.centerRight);
                             break;
                         case this.condition.bottomLeft(mouse, this.border):
-                            this.setBackground(this.positions.bottomLeft);
+                            this.setBackgroundPosition(this.positions.bottomLeft);
                             break;
                         case this.condition.bottom(mouse, this.border):
-                            this.setBackground(this.positions.bottomCenter);
+                            this.setBackgroundPosition(this.positions.bottomCenter);
                             break;
                         case this.condition.bottomRight(mouse, this.border):
-                            this.setBackground(this.positions.bottomRight);
+                            this.setBackgroundPosition(this.positions.bottomRight);
                             break;
                     }
                 }
             },
-            setBackground: {
+            setBackgroundPosition: {
                 value: function (value) {
                     this.element.css('backgroundPosition', value);
+                }
+            },
+            setBackgroundImage: {
+                value: function (value) {
+                    this.element.css('backgroundImage', value);
                 }
             },
             positions: {
@@ -130,7 +135,7 @@
                     if (!photo.element.hasClass('fun')) {
                         photo.element.addClass('fun');
                     }
-                    photo.setBackground(photo.positions.fun);
+                    photo.setBackgroundPosition(photo.positions.fun);
                     event.preventDefault();
                 }
             }
@@ -173,7 +178,7 @@
         mouseleave: {
             value: function () {
                 $.each(photos.elements, function(index, item){
-                    item.setBackground(item.positions.initial);
+                    item.setBackgroundPosition(item.positions.initial);
                 });
             }
         }
@@ -185,7 +190,8 @@
         $.each(container.element.find('.looking-photo'), function(index, item){
             var tmpPhoto = new Photo();
             tmpPhoto.element = $(item);
-            tmpPhoto.setBackground(tmpPhoto.positions.initial);
+            tmpPhoto.setBackgroundImage(tmpPhoto.element.attr('href'));
+            tmpPhoto.setBackgroundPosition(tmpPhoto.positions.initial);
             tmpPhoto.element.bind('click.looking-photo', {'index': index}, tmpPhoto.click);
             photos.elements[index] = tmpPhoto;
         });
