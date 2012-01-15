@@ -26,10 +26,10 @@
             container.element = $(containerItem);
             container.element.bind('mousemove.looking-photo', {'containerIndex': containerIndex}, container.mousemove);
             container.element.bind('mouseleave.looking-photo', {'containerIndex': containerIndex}, container.mouseleave);
-            $.each(container.element.find('.looking-photo'), function(photoIndex, photoItem){
+            $.each(container.element.find('.looking-photo-item'), function(photoIndex, photoItem){
                 var photo = new Photo();
                 photo.element = $(photoItem);
-                var imagePath = photo.element.data('href');
+                var imagePath = photo.element.data('looking_photo_src');
                 var image = new Image();
                 image.src = imagePath;
                 image.onload = function() {
@@ -153,8 +153,8 @@
                 var container = containers.elements[containerIndex];
                 var photoIndex = event.data.photoIndex;
                 var photo = container.photos.elements[photoIndex];
-                if (!photo.element.hasClass('fun')) {
-                    photo.element.addClass('fun');
+                if (!photo.element.hasClass('looking-photo-fun')) {
+                    photo.element.addClass('looking-photo-fun');
                 }
                 photo.setBackgroundPosition(photo.positions.list.fun);
                 event.preventDefault();
@@ -178,7 +178,7 @@
                 var containerIndex = event.data.containerIndex;
                 var container = containers.elements[containerIndex];
                 $.each(container.photos.elements, function(photoIndex, photoItem){
-                    if (!photoItem.element.hasClass('fun')) {
+                    if (!photoItem.element.hasClass('looking-photo-fun')) {
                         photoItem.findBorders();
                         container.findBorders();
                         var mouse = {
@@ -189,7 +189,7 @@
                             photoItem.change(mouse);
                         }
                     } else {
-                        photoItem.element.removeClass('fun');
+                        photoItem.element.removeClass('looking-photo-fun');
                     }
                 });
             },
