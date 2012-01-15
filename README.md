@@ -1,7 +1,7 @@
 Looking photo with jQuery
 ---------------------------
 
-This small jQuery script watches for mouse movement.
+This jQuery plugin watches for mouse movement.
 
 When mouse moves over green square, it starts change style of inner square (photo)
 
@@ -29,3 +29,5 @@ required to have class .looking-photo-item.
         10.  bottomRight: will be shown when mouse is in bottom right sector of container outside photo,
         11.  fun: will be shown after click on photo
 5.  If all previous requirements are satisfied - you can use plugin by simply calling $.lookingPhoto(); in document.ready callback.
+
+lookingPhoto is a free jQuery plugin, available under [LGPL License](http://www.gnu.org/copyleft/lgpl.html).
