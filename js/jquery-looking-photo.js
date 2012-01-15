@@ -25,31 +25,31 @@
                 value: function (mouse) {
                     switch (true) {
                         case this.condition.topLeft(mouse, this.border):
-                            this.setBackgroundPosition(this.positions.topLeft);
+                            this.setBackgroundPosition(this.positions.list.topLeft);
                             break;
                         case this.condition.topRight(mouse, this.border):
-                            this.setBackgroundPosition(this.positions.topRight);
+                            this.setBackgroundPosition(this.positions.list.topRight);
                             break;
                         case this.condition.top(mouse, this.border):
-                            this.setBackgroundPosition(this.positions.topCenter);
+                            this.setBackgroundPosition(this.positions.list.topCenter);
                             break;
                         case this.condition.centerLeft(mouse, this.border):
-                            this.setBackgroundPosition(this.positions.centerLeft);
+                            this.setBackgroundPosition(this.positions.list.centerLeft);
                             break;
                         case this.condition.center(mouse, this.border):
-                            this.setBackgroundPosition(this.positions.centerCenter);
+                            this.setBackgroundPosition(this.positions.list.centerCenter);
                             break;
                         case this.condition.centerRight(mouse, this.border):
-                            this.setBackgroundPosition(this.positions.centerRight);
+                            this.setBackgroundPosition(this.positions.list.centerRight);
                             break;
                         case this.condition.bottomLeft(mouse, this.border):
-                            this.setBackgroundPosition(this.positions.bottomLeft);
+                            this.setBackgroundPosition(this.positions.list.bottomLeft);
                             break;
                         case this.condition.bottom(mouse, this.border):
-                            this.setBackgroundPosition(this.positions.bottomCenter);
+                            this.setBackgroundPosition(this.positions.list.bottomCenter);
                             break;
                         case this.condition.bottomRight(mouse, this.border):
-                            this.setBackgroundPosition(this.positions.bottomRight);
+                            this.setBackgroundPosition(this.positions.list.bottomRight);
                             break;
                     }
                 }
@@ -65,22 +65,26 @@
                 }
             },
             positions: {
-                value: (function () {
-                    var step = -200;
-                    return {
-                        topLeft: 1 * step + 'px 0', // coordinates of part of foto with same name
-                        topCenter: 2 * step + 'px 0',
-                        topRight: 3 * step + 'px 0',
-                        centerLeft: 4 * step + 'px 0',
-                        centerCenter: 0 * step + ' 0',
-                        centerRight: 6 * step + 'px 0',
-                        bottomLeft: 7 * step + 'px 0',
-                        bottomCenter: 8 * step + 'px 0',
-                        bottomRight: 9 * step + 'px 0',
-                        initial: 5 * step + 'px 0',
-                        fun: 10 * step + 'px 0'
-                    };
-                })()
+                value: {
+                    step: -200,
+                    list: {},
+                    init: function(step) {
+                        var step = step ? -1 * step : this.step;
+                        this.list = {
+                            topLeft: 1 * step + 'px 0',
+                            topCenter: 2 * step + 'px 0',
+                            topRight: 3 * step + 'px 0',
+                            centerLeft: 4 * step + 'px 0',
+                            centerCenter: 0 * step + ' 0',
+                            centerRight: 6 * step + 'px 0',
+                            bottomLeft: 7 * step + 'px 0',
+                            bottomCenter: 8 * step + 'px 0',
+                            bottomRight: 9 * step + 'px 0',
+                            initial: 5 * step + 'px 0',
+                            fun: 10 * step + 'px 0'
+                        };
+                    }
+                }
             },
             condition: {
                 value: {
@@ -130,70 +134,94 @@
             },
             click: {
                 value: function (event) {
-                    var index = event.data.index;
-                    var photo = photos.elements[index];
+                    var containerIndex = event.data.containerIndex;
+                    var container = containers.elements[containerIndex];
+                    var photoIndex = event.data.photoIndex;
+                    var photo = container.photos.elements[photoIndex];
                     if (!photo.element.hasClass('fun')) {
                         photo.element.addClass('fun');
                     }
-                    photo.setBackgroundPosition(photo.positions.fun);
+                    photo.setBackgroundPosition(photo.positions.list.fun);
                     event.preventDefault();
                 }
             }
         });
     }
-
-    var photos = {
+    var containers = {
         elements: []
-    };
-    var container = Object.create(Item, {
-        condition: {
-            value: {
-                insideContainer: function (mouse, border) {
-                    return mouse.x > border.left
-                        && mouse.x < border.right
-                        && mouse.y > border.top
-                        && mouse.y < border.bottom;
+    }
+    function Container() {
+        return Object.create(Item, {
+            photos: {
+                value: {
+                    elements: []
+                }
+            },
+            condition: {
+                value: {
+                    insideContainer: function (mouse, border) {
+                        return mouse.x > border.left
+                            && mouse.x < border.right
+                            && mouse.y > border.top
+                            && mouse.y < border.bottom;
+                    }
+                }
+            },
+            mousemove: {
+                value: function (event) {
+                    var containerIndex = event.data.containerIndex;
+                    var container = containers.elements[containerIndex];
+                    $.each(container.photos.elements, function(photoIndex, photoItem){
+                        if (!photoItem.element.hasClass('fun')) {
+                            photoItem.findBorders();
+                            container.findBorders();
+                            var mouse = {
+                                x: event.pageX,
+                                y: event.pageY
+                            };
+                            if (container.condition.insideContainer(mouse, container.border)) {
+                                photoItem.change(mouse);
+                            }
+                        } else {
+                            photoItem.element.removeClass('fun');
+                        }
+                    });
+                }
+            },
+            mouseleave: {
+                value: function (event) {
+                    var containerIndex = event.data.containerIndex;
+                    var container = containers.elements[containerIndex];
+                    $.each(container.photos.elements, function(containerIndex, containerItem){
+                        containerItem.setBackgroundPosition(containerItem.positions.list.initial);
+                    });
                 }
             }
-        },
-        mousemove: {
-            value: function (event) {
-                $.each(photos.elements, function(index, item){
-                    if (!item.element.hasClass('fun')) {
-                        item.findBorders();
-                        container.findBorders();
-                        var mouse = {
-                            x: event.pageX,
-                            y: event.pageY
-                        };
-                        if (container.condition.insideContainer(mouse, container.border)) {
-                            item.change(mouse);
-                        }
-                    } else {
-                        item.element.removeClass('fun');
-                    }
-                });
-            }
-        },
-        mouseleave: {
-            value: function () {
-                $.each(photos.elements, function(index, item){
-                    item.setBackgroundPosition(item.positions.initial);
-                });
-            }
-        }
-    });
+        });
+    }
     $.fn.lookingPhoto = function () {
-        container.element = this;
-        container.element.bind('mousemove.looking-photo', container.mousemove);
-        container.element.bind('mouseleave.looking-photo', container.mouseleave);
-        $.each(container.element.find('.looking-photo'), function(index, item){
-            var tmpPhoto = new Photo();
-            tmpPhoto.element = $(item);
-            tmpPhoto.setBackgroundImage(tmpPhoto.element.attr('href'));
-            tmpPhoto.setBackgroundPosition(tmpPhoto.positions.initial);
-            tmpPhoto.element.bind('click.looking-photo', {'index': index}, tmpPhoto.click);
-            photos.elements[index] = tmpPhoto;
+        $.each($('.looking-photo-container'), function(containerIndex, containerItem){
+            var container = new Container();
+            container.element = $(containerItem);
+            container.element.bind('mousemove.looking-photo', {'containerIndex': containerIndex}, container.mousemove);
+            container.element.bind('mouseleave.looking-photo', {'containerIndex': containerIndex}, container.mouseleave);
+            $.each(container.element.find('.looking-photo'), function(photoIndex, photoItem){
+                var photo = new Photo();
+                photo.element = $(photoItem);
+                var imagePath = photo.element.data('href');
+                var image = new Image();
+                image.src = imagePath;
+                image.onload = function() {
+                    photo.element.css('width', this.height);
+                    photo.element.css('height', this.height);
+                    photo.positions.init(this.height);
+                    photo.setBackgroundImage(imagePath);
+                    photo.setBackgroundPosition(photo.positions.list.initial);
+                }
+                photo.element.bind('click.looking-photo', {'photoIndex': photoIndex, 'containerIndex': containerIndex}, photo.click);
+                container.photos.elements[photoIndex] = photo;
+            });
+            containers.elements[containerIndex] = container;
         });
     };
 })(jQuery);

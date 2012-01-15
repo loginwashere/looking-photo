@@ -11,15 +11,23 @@
     </header>
     <section id="content">
         <article>
-            <div class="container">
-                <a href="images/image.jpg" class="looking-photo"></a>
-                <a href="images/image.jpg" class="looking-photo"></a>
-                <a href="images/image.jpg" class="looking-photo"></a>
-                <a href="images/image.jpg" class="looking-photo"></a>
-            </div>
+            <h2>Using plugin on images with same sizes:</h2>
             <p>This small jQuery script watches for mouse movement.</p>
             <p>When mouse moves over green square, it starts change style of inner square (photo)</p>
             <p>It creates an illusion, that photo is looking at mouse.</p>
+            <div id="first-container" class="looking-photo-container">
+                <div data-href="images/image.jpg" class="looking-photo"></div>
+                <div data-href="images/image.jpg" class="looking-photo"></div>
+                <div data-href="images/image.jpg" class="looking-photo"></div>
+                <div data-href="images/image.jpg" class="looking-photo"></div>
+            </div>
+            <h2>Using plugin on images with different sizes:</h2>
+            <div id="second-container" class="looking-photo-container">
+                <div data-href="images/image-small.jpg" class="looking-photo"></div>
+                <div data-href="images/image-big.jpg" class="looking-photo"></div>
+                <div data-href="images/image-big.jpg" class="looking-photo"></div>
+                <div data-href="images/image.jpg" class="looking-photo"></div>
+            </div>
         </article>
     </section>
     <footer class="main">

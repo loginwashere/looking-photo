@@ -12,12 +12,6 @@ header.main,footer.main {
     text-align: center;
     color: #fff;
 }
-footer.main {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
 footer.main ul{
     list-style: none;
 }
@@ -30,6 +24,7 @@ footer.main ul{
 }
 #content {
     padding: 20px;
+    height: 100%;
 }
 #content h2,
 #content p {
@@ -38,17 +33,22 @@ footer.main ul{
 /**
  * Styles for foto element
  */
-div.container {
-    width: 575px;/* width of green square */
-    height: 575px;/* height of green square */
+
+div#first-container,
+div#second-container {
+    margin: 0 auto;
     background: green;
     border: 1px solid black;
-    margin: 20px auto;
+}
+div#first-container {
+    width: 550px;
+    height: 550px;
+}
+div#second-container {
+    width: 650px;
+    height: 750px;
 }
 .looking-photo {
-    display: block;
     float: left;
-    width: 200px; /* width of displayed image */
-    height: 200px; /* height of displayed image */
-    margin: 50px 25px 25px 50px;
+    margin: 50px 0 0 50px;
 }
